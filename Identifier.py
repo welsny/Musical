@@ -10,7 +10,7 @@ def chord(myOctave):
     return myOctave.toString()
 
 # Translates a String of notes into an Octave.
-def fromString(notes):
+def _fromString(notes):
 
     indexes = []
     while notes: #is not empty
@@ -37,7 +37,7 @@ def fromString(notes):
     return myOctave
 
 # Translates a GuitarTab string to an Octave.
-def fromGuitar(tabString):
+def _fromGuitar(tabString):
 
     indexes = []
 
@@ -47,3 +47,12 @@ def fromGuitar(tabString):
             indexes.append(noteIndex)
 
     return Octave(indexes)
+
+def identify(user_input):
+    try:
+        return chord(_fromString(user_input))
+    except:
+        try:
+            return chord(_fromGuitar(user_input))
+        except:
+            return "Illegal Input Detected"
