@@ -21,7 +21,8 @@ class Octave():
         for offset in range(12):
             for c in CHORDS:
                 if keyCount == c.count() and self.patternMatches(c.pattern):
-                    self.chord = c.setRoot(getNote(offset))
+                    c.setRoot = getNote(offset)
+                    self.chord = c
                     break
 
             # If no chords match, rotates the list.

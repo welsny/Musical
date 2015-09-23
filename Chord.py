@@ -8,7 +8,6 @@ class Chord():
 
     def setRoot(self, root):
         self.root = root
-        return self
 
     def toString(self):
         if self.root == None:
