@@ -26,21 +26,13 @@ def spaceRow():
     label.pack()
     newRow.pack()
 
-# Gets strings from the entry boxes, computes percentage with loveAlgorithm, and updates chancesLabel and resultsLabel.
-def identify():
+def identify_button_pressed():
     user_input = entry.get()
 
-    try:
-        result = id.chord(id.fromString(user_input))
-    except:
-        try:
-            result = id.chord(id.fromGuitar(user_input))
-        except:
-            result = "Illegal Input Detected"
+    result = id.identify(user_input)
 
-    # resultsLabel["text"] = result
-    # label["text"] = result + ': '
     tkinter.messagebox.showinfo('Results', result+" ")
+
 
 infoButton = tkinter.Button(r2,text= " help ", font=("Courier New",10),
                             command= lambda:
@@ -49,7 +41,7 @@ infoButton = tkinter.Button(r2,text= " help ", font=("Courier New",10),
                                                         " and guitar tabs. \n\n"
                                                         "Ex:\n 'CEG' = C Maj\n 'x21202' = B dom7"))
 
-identifyButton = tkinter.Button(r2,text=" IDENTIFY ", command=identify, font=("Courier New",10))
+identifyButton = tkinter.Button(r2,text=" IDENTIFY ", command=identify_button_pressed, font=("Courier New",10))
 
 spaceRow()
 
