@@ -1,5 +1,5 @@
-from Octave import *
-from Chord import *
+from octave import *
+from chord import *
 
 GUITAR = [4, 9, 2, 7, 11, 4]
 

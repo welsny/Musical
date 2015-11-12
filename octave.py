@@ -1,4 +1,4 @@
-from Chord import *
+from chord import *
 from funcy.colls import *
 
 
