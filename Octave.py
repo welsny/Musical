@@ -9,7 +9,7 @@ Its constructor takes a list of indexes representing the numeric value of a set 
 class Octave():
     def __init__(self, noteIndexes):
         self.activeNotes = []
-        self.chord = None
+        self.__chord = None
 
         for i in range(12):
             self.activeNotes.append(False)
@@ -23,22 +23,27 @@ class Octave():
                 if keyCount == c.count() and self.patternMatches(c.pattern):
                     root = getNote(offset)
                     c.setRoot(root)
-                    self.chord = c
+                    self.__chord = c
                     break
 
             # If no chords match, rotates the list.
             self.activeNotes = self.activeNotes[1:] + self.activeNotes[:1]
 
             # Breaks when a chord is found.
-            if (self.chord != None):
+            if (self.__chord != None):
                 break
 
         # If chord wasn't matched in above loop, sets chord as a Null Chord.
-        if (self.chord == None):
-            self.chord = UNKNOWN_CHORD
+        if (self.__chord == None):
+            self.__chord = UNKNOWN_CHORD
 
-    def addNote(self, noteIndex):
-        self.activeNotes[noteIndex] = True
+    @property
+    def chord(self):
+        '''Get the Chord object that this Octave represents'''
+        return self.__chord
+
+    def __str__(self):
+        return str(self.activeNotes)
 
     '''
     Takes a pattern and returns the matching chord if any.
@@ -53,10 +58,3 @@ class Octave():
                 return False
 
         return True
-
-    # Getter method for an Octave's chord.
-    def getChord(self):
-        return self.chord
-
-    def toString(self):
-        return self.chord.toString()

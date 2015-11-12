@@ -7,7 +7,7 @@ GUITAR = [4, 9, 2, 7, 11, 4]
 
 # Translates an Octave into a String of notes.
 def chord(myOctave):
-    return myOctave.toString()
+    return str(myOctave.chord)
 
 # Translates a String of notes into an Octave.
 def _fromString(notes):

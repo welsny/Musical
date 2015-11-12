@@ -9,7 +9,7 @@ class Chord():
     def setRoot(self, root):
         self.root = root
 
-    def toString(self):
+    def __str__(self):
         if self.root == None:
             return self.type
 
