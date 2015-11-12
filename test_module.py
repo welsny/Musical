@@ -4,15 +4,18 @@ import unittest
 
 import Identifier as id
 
+from Octave import *
+
+
 class TestBackend(unittest.TestCase):
 
-    def test_identify(self):
+    def integration_tests(self):
+
+        self.assertEqual("C Maj", id.identify("x32010"))
 
         self.assertEqual("A min", id.identify("x02210"))
 
         self.assertEqual("E dom7", id.identify("xx2434"))
-
-        self.assertEqual("C Maj", id.identify("x32010"))
 
         self.assertEqual("C Maj7", id.identify("x32000"))
 
@@ -24,4 +27,17 @@ class TestBackend(unittest.TestCase):
 
         self.assertEqual("B dom7", id.identify("x21202"))
 
-unittest.main()
+
+class TestOctave(unittest.TestCase):
+
+    def test_init(self):
+
+        self.assertEqual("C Maj", str(Octave([0, 4, 7]).chord))
+
+        self.assertEqual("D Maj", str(Octave([2, 6, 9]).chord))
+
+        self.assertEqual("A min", str(Octave([9, 4, 0]).chord))
+
+
+if __name__ == "__main__":
+    unittest.main()
