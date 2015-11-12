@@ -27,7 +27,7 @@ class Note(object):
 
 
 def get_note(noteval):
-    """:return: The Note the corresponds to the given note value modulo 12. """
+    """:return: The Note corresponding to the input value modulo 12."""
     for n in NOTES:
         if noteval % 12 == n.value:
             return n

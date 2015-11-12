@@ -18,27 +18,26 @@ def _from_string(notes):
     :return: An Octave instance representation of the input String
     """
 
-    indexes = []
-    while notes: #is not empty
+    piano = {}
+    while notes:
 
         for i in NOTES:
             if notes[0] == i.name:
-                noteval = i.value
+                note_index = i.value
 
-                # Accidentals
                 if len(notes) >= 2:
                     if notes[1] == '#':
-                        noteval += 1
+                        note_index += 1
                         notes = notes[1:]
                     elif notes[1] == 'b':
-                        noteval -= 1
+                        note_index -= 1
                         notes = notes[1:]
 
-        indexes.append(noteval)
+        piano[note_index] = True
 
         notes = notes[1:]
 
-    return Octave(indexes)
+    return Octave(piano.keys())
 
 
 def _from_guitar(tab_string):
@@ -47,14 +46,14 @@ def _from_guitar(tab_string):
     :return: An Octave instance representation of the input String
     """
 
-    indexes = []
+    piano = {}
 
     for i in range(6):
-        if tab_string[i] != "x":
+        if tab_string[i] != 'x':
             note_index = (GUITAR[i] + int(tab_string[i])) % 12
-            indexes.append(note_index)
+            piano[note_index] = True
 
-    return Octave(indexes)
+    return Octave(piano.keys())
 
 
 def identify(user_input):
@@ -64,4 +63,4 @@ def identify(user_input):
         try:
             return chord(_from_guitar(user_input))
         except:
-            return "Illegal Input Detected"
+            return 'Illegal Input Detected'

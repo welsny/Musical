@@ -39,12 +39,13 @@ class Octave(object):
         """
 
         for offset in range(12):
-            for c in CHORDS:
-                if self.__keycount == c.count() and self.__pattern_matches(c.pattern):
-                    root = get_note(offset)
-                    c.setRoot(root)
-                    self.__chord = c
-                    break
+            if self.__active_notes[0]:
+                for c in CHORDS:
+                    if self.__keycount == c.count() and self.__pattern_matches(c.pattern):
+                        root = get_note(offset)
+                        c.setRoot(root)
+                        self.__chord = c
+                        break
 
             # If no chords match, rotate the list
             self.__active_notes = walk_keys(lambda key: 11 if key == 0 else key - 1, self.__active_notes)
