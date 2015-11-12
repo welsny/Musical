@@ -1,65 +1,68 @@
-__author__ = 'lola'
-
 from Chord import *
 from funcy.colls import *
 
-'''
-Octave represents the active notes in an Octave as a list of Booleans.
-Its constructor takes a list of indexes representing the numeric value of a set of notes.
-'''
-class Octave():
-    def __init__(self, noteIndexes):
-        self.activeNotes = {}
+
+class Octave(object):
+    """
+    Octave organizes a list of notes into an abstract musical octave model.
+    Its constructor takes a list of indexes representing the numeric value of a set of notes.
+    """
+
+    def __init__(self, notes_indexes):
+        self.__active_notes = {}
         self.__chord = None
-        self.keycount = 0
+        self.__keycount = 0
 
         for i in range(12):
-            self.activeNotes[i] = False
+            self.__active_notes[i] = False
 
-        for i in noteIndexes:
-            self.activeNotes[i] = True
+        for i in notes_indexes:
+            self.__active_notes[i] = True
 
-        for key in self.activeNotes:
-            if self.activeNotes[key]:
-                self.keycount += 1
+        for key in self.__active_notes:
+            if self.__active_notes[key]:
+                self.__keycount += 1
+
+        self.__identify()
+
+    @property
+    def chord(self):
+        return self.__chord
+
+    def __str__(self):
+        return str(self.__active_notes)
+
+    def __identify(self):
+        """
+        Identifies the chord represented in the Octave. If the chord is unknown, sets self.__chord to UNKNOWN_CHORD.
+        POST: self.__chord is not None
+        """
 
         for offset in range(12):
             for c in CHORDS:
-                if self.keycount == c.count() and self.patternMatches(c.pattern):
-                    root = getNote(offset)
+                if self.__keycount == c.count() and self.__pattern_matches(c.pattern):
+                    root = get_note(offset)
                     c.setRoot(root)
                     self.__chord = c
                     break
 
             # If no chords match, rotate the list
-            self.activeNotes = walk_keys(lambda key: 11 if key == 0 else key - 1, self.activeNotes)
+            self.__active_notes = walk_keys(lambda key: 11 if key == 0 else key - 1, self.__active_notes)
 
-            # Break when a chord is found
-            if (self.__chord != None):
+            if self.__chord:
                 break
 
-        # If chord wasn't matched in above loop, sets chord as a Null Chord.
-        if (self.__chord == None):
+        if not self.__chord:
             self.__chord = UNKNOWN_CHORD
 
-    @property
-    def chord(self):
-        '''Get the Chord object that this Octave represents'''
-        return self.__chord
-
-    def __str__(self):
-        return str(self.activeNotes)
-
-    '''
-    Takes a pattern and returns the matching chord if any.
-    If found, sets self.rootNote to the root of the chord.
-
-    PRE: The number of notes in self.chord and pattern are equal.
-    '''
-    def patternMatches(self, pattern):
+    def __pattern_matches(self, pattern):
+        """
+        :return: 'True' iff the pattern matches the active notes in this Octave
+        Precondition: the number of notes in pattern and active_notes are equal
+        """
 
         for i in pattern:
-            if not self.activeNotes[i]:
+            if not self.__active_notes[i]:
                 return False
 
         return True

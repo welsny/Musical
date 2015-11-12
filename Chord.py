@@ -1,6 +1,7 @@
 __author__ = 'lola'
 
-class Chord():
+
+class Chord(object):
     def __init__(self, type, pattern, root=None):
         self.type = type
         self.pattern = pattern
@@ -10,7 +11,7 @@ class Chord():
         self.root = root
 
     def __str__(self):
-        if self.root == None:
+        if self.root is None:
             return self.type
 
         return self.root.name + " " + self.type
@@ -18,17 +19,17 @@ class Chord():
     def count(self):
         return len(self.pattern)
 
-class Note():
+
+class Note(object):
     def __init__(self, name, value):
         self.name = name
         self.value = value
 
-'''
-Takes a number and returns the corresponding note value modulo 12.
-'''
-def getNote(noteVal):
+
+def get_note(noteval):
+    """:return: The Note the corresponds to the given note value modulo 12. """
     for n in NOTES:
-        if noteVal % 12 == n.value:
+        if noteval % 12 == n.value:
             return n
 
 ''' CONSTANTS: '''

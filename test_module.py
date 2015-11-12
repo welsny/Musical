@@ -7,9 +7,9 @@ import Identifier as id
 from Octave import *
 
 
-class TestBackend(unittest.TestCase):
+class Test(unittest.TestCase):
 
-    def integration_tests(self):
+    def test_integration(self):
 
         self.assertEqual("C Maj", id.identify("x32010"))
 
@@ -27,8 +27,6 @@ class TestBackend(unittest.TestCase):
 
         self.assertEqual("B dom7", id.identify("x21202"))
 
-
-class TestOctave(unittest.TestCase):
 
     def test_init(self):
 
