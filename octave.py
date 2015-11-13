@@ -30,7 +30,7 @@ class Octave(object):
         return self._chord
 
     def __str__(self):
-        return str(self._active_notes)
+        return str(self._chord) if self._chord else str(self._active_notes)
 
     def __identify(self):
         """
@@ -41,7 +41,7 @@ class Octave(object):
         for offset in range(12):
             if self._active_notes[0]:
                 for c in CHORDS:
-                    if self._keycount == c.count() and self.__pattern_matches(c._pattern):
+                    if self._keycount == c.count() and self.__pattern_matches(c.pattern):
                         root = get_note(offset)
                         self._chord = c.with_root(root)
                         break

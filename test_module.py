@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
         c = Note('C', 0)
         cmaj = Chord('Maj', [0, 4, 7], c)
 
-        self.assertEqual(str(cmaj), str(Chord('Maj', [0, 4, 7]).with_root(c)))
+        self.assertEqual(cmaj, Chord('Maj', [0, 4, 7]).with_root(c))
 
 
 if __name__ == "__main__":

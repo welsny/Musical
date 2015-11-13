@@ -29,10 +29,10 @@ class Chord(object):
         return ' '.join([self._root.name, self._quality])
 
     def __eq__(self, other):
-        return isinstance(other, Chord) &\
-               self._quality == other.quality() &\
-               self._pattern == other.pattern() &\
-               self._root == other.root()
+        return isinstance(other, Chord) and\
+               self._quality == other.quality and\
+               self._pattern == other.pattern and\
+               self._root == other.root
 
     def count(self):
         return len(self._pattern)
@@ -40,13 +40,24 @@ class Chord(object):
 
 class Note(object):
     def __init__(self, name, value):
-        self.name = name
-        self.value = value
+        self._name = name
+        self._value = value
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def value(self):
+        return self._value
+
+    def __str__(self):
+        return self.name
 
     def __eq__(self, other):
-        return isinstance(other, Note) &\
-               self.name == other.name &\
-               self.value == other.value
+        return isinstance(other, Note) and\
+               self._name == other.name and\
+               self._value == other.value
 
 
 def get_note(noteval):

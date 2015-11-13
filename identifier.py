@@ -9,7 +9,7 @@ def chord(octave):
     :param: An Octave instance
     :return: A string detailing the Chord that the Octave represents
     """
-    return str(octave.chord())
+    return str(octave.chord)
 
 
 def _from_string(notes):
