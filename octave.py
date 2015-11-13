@@ -9,28 +9,28 @@ class Octave(object):
     """
 
     def __init__(self, notes_indexes):
-        self.__active_notes = {}
-        self.__chord = None
-        self.__keycount = 0
+        self._active_notes = {}
+        self._chord = None
+        self._keycount = 0
 
         for i in range(12):
-            self.__active_notes[i] = False
+            self._active_notes[i] = False
 
         for i in notes_indexes:
-            self.__active_notes[i] = True
+            self._active_notes[i] = True
 
-        for key in self.__active_notes:
-            if self.__active_notes[key]:
-                self.__keycount += 1
+        for key in self._active_notes:
+            if self._active_notes[key]:
+                self._keycount += 1
 
         self.__identify()
 
     @property
     def chord(self):
-        return self.__chord
+        return self._chord
 
     def __str__(self):
-        return str(self.__active_notes)
+        return str(self._chord) if self._chord else str(self._active_notes)
 
     def __identify(self):
         """
@@ -39,22 +39,21 @@ class Octave(object):
         """
 
         for offset in range(12):
-            if self.__active_notes[0]:
+            if self._active_notes[0]:
                 for c in CHORDS:
-                    if self.__keycount == c.count() and self.__pattern_matches(c.pattern):
+                    if self._keycount == c.count() and self.__pattern_matches(c.pattern):
                         root = get_note(offset)
-                        c.setRoot(root)
-                        self.__chord = c
+                        self._chord = c.with_root(root)
                         break
 
             # If no chords match, rotate the list
-            self.__active_notes = walk_keys(lambda key: 11 if key == 0 else key - 1, self.__active_notes)
+            self._active_notes = walk_keys(lambda key: 11 if key == 0 else key - 1, self._active_notes)
 
-            if self.__chord:
+            if self._chord:
                 break
 
-        if not self.__chord:
-            self.__chord = UNKNOWN_CHORD
+        if not self._chord:
+            self._chord = UNKNOWN_CHORD
 
     def __pattern_matches(self, pattern):
         """
@@ -63,7 +62,7 @@ class Octave(object):
         """
 
         for i in pattern:
-            if not self.__active_notes[i]:
+            if not self._active_notes[i]:
                 return False
 
         return True

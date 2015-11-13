@@ -1,5 +1,6 @@
 from identifier import *
 from octave import *
+from chord import *
 import unittest
 
 
@@ -30,6 +31,13 @@ class Test(unittest.TestCase):
         self.assertEqual("D Maj", str(Octave([2, 6, 9]).chord))
 
         self.assertEqual("A min", str(Octave([9, 4, 0]).chord))
+
+    def test_chord(self):
+
+        c = Note('C', 0)
+        cmaj = Chord('Maj', [0, 4, 7], c)
+
+        self.assertEqual(cmaj, Chord('Maj', [0, 4, 7]).with_root(c))
 
 
 if __name__ == "__main__":
