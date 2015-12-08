@@ -29,6 +29,10 @@ class Test(unittest.TestCase):
 
         self.assertEqual("C Maj7", identify("0002"))
 
+        self.assertEqual("G min7", identify("0211"))
+
+        self.assertEqual("G#/Ab Maj", identify("1343"))
+
 
 if __name__ == "__main__":
     unittest.main()
