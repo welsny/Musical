@@ -2,6 +2,7 @@ from octave import *
 from chord import *
 
 GUITAR = [4, 9, 2, 7, 11, 4]
+UKELELE = [7, 0, 4, 9]
 
 
 def chord(octave):
@@ -40,17 +41,18 @@ def _from_string(notes):
     return Octave(piano.keys())
 
 
-def _from_guitar(tab_string):
+def _from_tab(tab_string, instrument):
     """
-    :param: A Guitar Tab string (ex. 'x32010', '022100' with exactly 6 numeric digits or 'x')
+    :param: A tab string and the instrument that the tab is being played on. 
+            py(ex. 'x32010' and GUITAR, or '0002' and UKELELE)
     :return: An Octave instance representation of the input String
     """
 
     piano = {}
 
-    for i in range(6):
+    for i in range(len(instrument)):
         if tab_string[i] != 'x':
-            note_index = (GUITAR[i] + int(tab_string[i])) % 12
+            note_index = (instrument[i] + int(tab_string[i])) % 12
             piano[note_index] = True
 
     return Octave(piano.keys())
@@ -61,6 +63,8 @@ def identify(user_input):
         return chord(_from_string(user_input))
     except:
         try:
-            return chord(_from_guitar(user_input))
+            if len(user_input) == 6:
+                return chord(_from_tab(user_input, GUITAR))
+            return chord(_from_tab(user_input, UKELELE))
         except:
-            return 'Illegal Input Detected'
+            return 'Invalid Input'
