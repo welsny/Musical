@@ -50,9 +50,9 @@ def _from_tab(tab_string, instrument):
 
     piano = {}
 
-    for i in range(len(instrument)):
+    for i, e in enumerate(instrument):
         if tab_string[i] != 'x':
-            note_index = (instrument[i] + int(tab_string[i])) % 12
+            note_index = (e + int(tab_string[i])) % 12
             piano[note_index] = True
 
     return Octave(piano.keys())
