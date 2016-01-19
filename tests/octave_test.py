@@ -1,5 +1,4 @@
 import unittest
-from path import *
 from octave import *
 
 
