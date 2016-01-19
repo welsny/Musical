@@ -52,12 +52,12 @@ chord xx5777
 #### Notes
 
 
-This project also includes a sample GUI interface implemented with [TkInter](https://wiki.python.org/moin/TkInter). 
+* This project also includes a sample GUI interface implemented with [TkInter](https://wiki.python.org/moin/TkInter). 
   * To open, enter `python sample_gui_app.py` into your terminal. 
   * Fonts are optimized for Ubuntu. 
   * Fonts do *not* look good on Mac OS X. 
 
-The chord-identifying algorithm supports many commonly-used chord qualities, but not *all* of them - in particular the more obscure/uncommon ones. 
+* The chord-identifying algorithm supports many commonly-used chord qualities, but not *all* of them - in particular the more obscure/uncommon ones. 
   * Support for more exotic chord qualities will be added *Soon™*
 
 ---
