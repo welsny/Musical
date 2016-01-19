@@ -1,5 +1,5 @@
 import sys
-import Identifier
+from identifier import *
 
 def identify_chord(argv):
 	
@@ -8,7 +8,7 @@ def identify_chord(argv):
 	for i in argv[1:]:
 		user_input += i
 
-	result = Identifier.identify(user_input)
+	result = identify(user_input)
 
 	print('\n' + result + '\n')
 
