@@ -65,7 +65,7 @@ chord xx5777
 #### Tests
 
 ```
-./test.py
+./tests.py
 ```
 
 -
