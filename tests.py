@@ -1,8 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import unittest
+
+from chord import *
 from identifier import *
+from octave import *
 
 
-class Test(unittest.TestCase):
+class TestChord(unittest.TestCase):
+
+    def test_chord(self):
+
+        c = Note('C', 0)
+        cmaj = Chord('Maj', [0, 4, 7], c)
+
+        self.assertEqual(cmaj, Chord('Maj', [0, 4, 7]).with_root(c))
+
+
+class TestIdentifier(unittest.TestCase):
 
     def test_guitar(self):
 
@@ -33,5 +49,17 @@ class Test(unittest.TestCase):
         self.assertEqual("G#/Ab Maj", identify("1343"))
 
 
+class Test(unittest.TestCase):
+
+    def test_init(self):
+
+        self.assertEqual("C Maj", str(Octave([0, 4, 7]).chord))
+
+        self.assertEqual("D Maj", str(Octave([2, 6, 9]).chord))
+
+        self.assertEqual("A min", str(Octave([9, 4, 0]).chord))
+
+
 if __name__ == "__main__":
     unittest.main()
+
