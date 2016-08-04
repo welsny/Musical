@@ -4,14 +4,12 @@ from chord import *
 GUITAR = [4, 9, 2, 7, 11, 4]
 UKELELE = [7, 0, 4, 9]
 
-
 def chord(octave):
     """
     :param: An Octave instance
     :return: A string detailing the Chord that the Octave represents
     """
     return str(octave.chord)
-
 
 def _from_string(notes):
     """
@@ -40,10 +38,9 @@ def _from_string(notes):
 
     return Octave(piano.keys())
 
-
 def _from_tab(tab_string, instrument):
     """
-    :param: A tab string and the instrument that the tab is being played on. 
+    :param: A tab string and the instrument that the tab is being played on.
             py(ex. 'x32010' and GUITAR, or '0002' and UKELELE)
     :return: An Octave instance representation of the input String
     """
@@ -68,3 +65,4 @@ def identify(user_input):
             return chord(_from_tab(user_input, UKELELE))
         except:
             return 'Invalid Input'
+

@@ -61,8 +61,5 @@ class Octave(object):
         Precondition: the number of notes in pattern and active_notes are equal
         """
 
-        for i in pattern:
-            if not self._active_notes[i]:
-                return False
+        return all(self._active_notes[i] for i in pattern)
 
-        return True

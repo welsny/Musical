@@ -23,15 +23,15 @@ class Chord(object):
         return Chord(self._quality, self._pattern, new_root)
 
     def __str__(self):
-        if self._root is None:
+        if not self._root:
             return self._quality
 
-        return ' '.join([self._root.name, self._quality])
+        return '{0} {1}'.format(self.root, self.quality)
 
     def __eq__(self, other):
-        return isinstance(other, Chord) and\
-               self._quality == other.quality and\
-               self._pattern == other.pattern and\
+        return isinstance(other, Chord) and \
+               self._quality == other.quality and \
+               self._pattern == other.pattern and \
                self._root == other.root
 
     def count(self):
@@ -55,8 +55,8 @@ class Note(object):
         return self.name
 
     def __eq__(self, other):
-        return isinstance(other, Note) and\
-               self._name == other.name and\
+        return isinstance(other, Note) and \
+               self._name == other.name and \
                self._value == other.value
 
 
@@ -80,5 +80,5 @@ CHORDS = [Chord("Maj", [0, 4, 7]), Chord("min", [0, 3, 7]),
           Chord("Maj7", [0, 4, 7, 11]), Chord("min7", [0, 3, 7, 10]),
           Chord("dom7", [0, 4, 7, 10]), Chord("dim7", [0, 3, 6, 9])]
 
-# An unknown chord that is returned when a chord cannot be identified.
+# Flag object representing an unknown chord, to be returned when a sequence of notes cannot be identified.
 UNKNOWN_CHORD = Chord("Unknown Chord", None)
