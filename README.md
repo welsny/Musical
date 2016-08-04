@@ -1,6 +1,6 @@
 ## *Musical* 
 
-Identify musical chords from guitar tab, ukulele tab, and more:
+Identify musical chords on guitar, ukulele, and more:
 
 ###### Guitar
 ```bash
@@ -54,8 +54,8 @@ chord xx5777
 
 * This project also includes a sample GUI interface implemented with [TkInter](https://wiki.python.org/moin/TkInter). 
   * To open, enter `python sample_gui_app.py` into your terminal. 
-  * Fonts are optimized for Ubuntu. 
-  * Fonts do *not* look good on Mac OS X. 
+  * Fonts are optimized for Ubuntu, and currently do *not* look good on Mac OS X. 
+  * TODO: Switch to [React Native Desktop](https://github.com/ptmt/react-native-desktop)
 
 * The chord-identifying algorithm supports many commonly-used chord qualities, but not *all* of them - in particular the more obscure/uncommon ones. 
   * Support for more exotic chord qualities will be added *Soon™*
@@ -65,9 +65,7 @@ chord xx5777
 #### Tests
 
 ```
-python -m tests.identifier_test
-python -m tests.octave_test
-python -m tests.chord_test
+./test.py
 ```
 
 -
